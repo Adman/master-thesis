@@ -1,6 +1,6 @@
-all: main.pdf
+all: efficient-cnns-recognizing-driveable-trails.pdf
 
-main.pdf: main.tex *.tex *.bib images/*
+efficient-cnns-recognizing-driveable-trails.pdf: main.tex *.tex *.bib images/*
 	pdflatex main
 	bibtex main
 	pdflatex main

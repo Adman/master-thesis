@@ -2,5 +2,55 @@
 \addcontentsline{toc}{chapter}{Conclusion} % rucne pridanie do obsahu
 \markboth{Conclusion}{Conclusion} % vyriesenie hlaviciek
 
-TODO conclusion
+In this work we focused on the problem of classifying pixels of the image into two categories,
+namely driveable segments and non-driveable ones. This problem has been raised by the need for a
+better vision module for the robot named Smelý Zajko.
+Students annually participate at the competition
+called RoboTour Outdoor Delivery Contest with this robot. The robot had been designed, built and
+continuously improved in previous works. However, the vision module did not take that much
+attention and we could not rely on predictions and information about driveable path.
+The weather and diversity of the environment are the main causes why previous approaches
+have not been successful enough. Based on recent advances with deep convolutional
+neural networks applied to computer vision, we decided to replace the robot's vision module
+with CNN models.
 
+We made a survey of the best contemporary ConvNet architectures for semantic segmentation
+and chose some of them to be tested on our robot. Training was conducted in supervised manner,
+meaning we provided images along with their ground truth labels to the models.
+There are two datasets of images and labels released along with this thesis.
+The images in these datasets were taken prior to RoboTour contests in Lednice and Deggendorf.
+
+Models trained on these images performed relatively well, so we chose ResNet to be used
+in Deggendorf since it showed the best trade-off between accuracy and prediction speed.
+The robot had some issues with localization and planning algorithm in
+the beginning, but in the end we were able to fix it and the robot worked fine. As the only
+one it drove beyond load point in that particular round. We obtained
+13 points in this competition, which brought us second place overall. However, these models
+were not fast enough in terms of prediction time and we tried to minimize them by reducing
+the number of filters and removing some layers. This step allows us to run the robot
+at higher speed. We compared these minimized models to the so called mobile models 
+that have been proposed recently. Interestingly, small version of MobileNetV3 reached
+almost 20 frames per second while our small ResNet topped at 10 frames per second,
+which is also nice and quite efficient at the image resolution of $640\times 480$. 
+
+Labeling entire dataset is often an expensive and time consuming process.
+We used Active Learning to study whether we are able to train
+the models with less labeled images while preserving reasonable accuracy. The models started
+to train on a small subset of training images and queried another ones to be labeled after
+each round.
+This process was repeated until the stopping condition was met. We used three sampling
+strategies, namely random, entropy and diversity sampling. Their detailed description is
+presented in Chapter \ref{chapter:activelearning}. Diversity and entropy methods performed
+better than random sampling and needed only half of the training dataset to reach an accuracy
+comparable with that of the models trained on the full dataset.
+Thus, we can conclude that it is worth considering to use active learning when
+training the model.
+
+In the future, we could study if it is possible to get rid of the labeling process completely
+and train the model in a fully unsupervised way. It is currently a deeply studied topic and
+the first works 
+\cite{bib:chen2019unsupervised, bib:nguyen2019deepusps, bib:bielski2019emergence}
+have been proposed recently at the NeurIPS conference.
+We also bought ZED mini stereo camera capable of creating depth map, tracking the position and
+giving us odometry information. It would be worth trying to incorporate the depth map
+into prediction of driveable trail, which could further improve the accuracy.

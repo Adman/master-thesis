@@ -2,4 +2,51 @@
 \addcontentsline{toc}{chapter}{Introduction} % rucne pridanie do obsahu
 \markboth{Introduction}{Introduction} % vyriesenie hlaviciek
 
-TODO introduction
+Robots are becoming a part of our daily lives nowadays. This includes helping people in
+their household chores, in the industry area, in the medical facilities or even in delivering
+packages and thus making our lives easier. The world of robotics has ever since raised
+enormous number of interesting problems to be solved. Many of them are subject to the current
+research. There are also many competitions being organized in order to attract more people into
+the field robotics. One of these competitions is RoboTour Outdoor Delivery Contest. Participants
+are challenged to build fully autonomous robot with the ability to drive in the
+outdoor environment through city park while delivering a load. The robots have to deal
+with various issues such as  obstacles, terrain and correct navigation.
+These problems can be solved by using reliable hardware parts, proper algorithms and
+math behind everything.
+
+In this work we focus on recognizing driveable path in the images taken from
+the camera mounted on the robot. This is quite important for the robot since it is not
+allowed to leave the driveable trail and breaking this rule leads to disqualification.
+Previous approaches have not been accurate enough due to very high sensitivity to
+weather conditions and the colors within the image, and because they do not take entire
+image as a whole into account but rather predict small regions. In recent years, deep learning
+has proven that many of these issues can be dealt with more precisely than reported
+previously. Therefore, in order to improve the vision module, we incorporate
+convolutional neural networks, which are suitable for computer vision applications. In our case,
+it is a dense semantic segmentation task that needs to be solved. Put differently, it means
+that, given the
+input image, we would like to predict which pixels correspond to driveable segments of the
+environment. Training the network is conducted in a supervised manner.
+There are Lednice and Deggendorf
+datasets available and their images had been captured right before the contests in
+2018 and 2019. We show that the models outperform technique based on HSV image statistics
+used at previous contests. Our approach was tested in Deggendorf, Germany where
+we found out that the prediction time is not sufficient when it comes to running the
+robot at higher speed. To reduce the prediction time, we minimize the size of the models
+while keeping the accuracy almost untouched, and compare them with the so called mobile
+models \cite{bib:howard2017mobilenets, bib:zhang2018shufflenet}
+designed for devices with low computational power.
+Moreover, we employ active learning technique \cite{bib:settles2009active}
+to reduce the number of images needed to be labeled since labeling
+entire dataset is a time consuming process and redundant samples which bring little
+value during training are best ignored.
+
+This work is structured into five chapters. In Chapter \ref{chapter:preliminaries} we
+describe semantic segmentation along with several basic techniques and convolutional
+neural networks. Chapter \ref{chapter:related_work} discusses related work in terms
+of architecture of successful networks and describes previous work on the robot. 
+In Chapter \ref{chapter:testingandcomparing} we present both datasets and compare
+results of the models. Subsequently, in Chapter \ref{chapter:fastermodels}, we present
+results of minimized models and comparison to the mobile models.
+Finally, in Chapter \ref{chapter:activelearning} we present results of our active learning
+experiments.
