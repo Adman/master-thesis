@@ -333,7 +333,7 @@ that both $m$ and $v$ are in the beginning biased at zero. With the bias correct
 the update looks as follows
 $$\hat{m}_t = \frac{1}{1-{\beta_1}^t}$$
 $$\hat{v}_t = \frac{1}{1-{\beta_2}^t}$$
-$$\theta = \theta - \alpha \frac{\hat{m}_t}{\sqrt{v_t} + \epsilon}$$
+$$\theta = \theta - \alpha \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}$$
 There are also many other optimizers available. Sometimes, it is worth trying SGD
 combined with Nesterov momentum as it might work slightly better in some cases.
 \cite{bib:cnncs231n}
